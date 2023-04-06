@@ -1,0 +1,11 @@
+# Use root/root credentials
+version: '3.8'
+
+services:
+  app:
+    image: newdeveloper/apache-php-composer
+    volumes:
+      - ./public:/var/www/html/
+      - ./apache:/etc/apache2
+    ports:
+      - 80:80
