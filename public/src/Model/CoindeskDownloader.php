@@ -4,9 +4,14 @@ namespace App\Model;
 
 class CoindeskDownloader
 {
-    public static function get() : array
+
+    public function __construct(private readonly string $url)
     {
-        $data = file_get_contents('https://api.coindesk.com/v1/bpi/currentprice.json');
+
+    }
+    public function get() : array
+    {
+        $data = file_get_contents($this->url);
         return json_decode($data,true);
     }
 }

@@ -1,4 +1,4 @@
 FROM  newdeveloper/apache-php-composer
 WORKDIR /var/www/html/
-ONBUILD RUN composer install
+ONBUILD CMD composer install
 EXPOSE 80
