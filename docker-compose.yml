@@ -8,4 +8,4 @@ services:
       - ./public:/var/www/html/
       - ./apache:/etc/apache2
     ports:
-      - "80:80"
+      - "8910:80"
