@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    Výpis kurzů BTC
+    <table>
+        <thead>
+            <tr>
+                <th>Jméno</th>
+                <th>Zkratka</th>
+                <th>Symbol</th>
+                <th>Cena</th>
+            </tr>
+        </thead>
+    {% for currency in data.bpi %}
+        <tr>
+            <td>{{ currency.description }}</td>
+            <td>{{ currency.code }}</td>
+            <td>{{ currency.symbol|raw }}</td>
+            <td>{{ currency.rate }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

@@ -16,8 +16,9 @@ class HomeController extends AbstractController
    #[Route('/')]
     public function number(): Response
     {
+        $data = $this->coindeskDownloader->get();
         return new Response(
-            var_export($this->coindeskDownloader->get(), true)
+            $this->render('home.twig',['data'=>$data])
         );
     }
 }
