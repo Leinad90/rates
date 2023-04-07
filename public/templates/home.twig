@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    Výpis kurzů BTC
+    Výpis kurzů BTC aktualizován {{ data.updated|format_datetime() }}
     <table>
         <thead>
             <tr>
@@ -10,12 +10,12 @@
                 <th>Cena</th>
             </tr>
         </thead>
-    {% for currency in data.bpi %}
+    {% for currency in data.courses %}
         <tr>
             <td>{{ currency.description }}</td>
             <td>{{ currency.code }}</td>
             <td>{{ currency.symbol|raw }}</td>
-            <td>{{ currency.rate }}</td>
+            <td>{{ currency.rate|number_format(2, ',', ' ') }}</td>
         </tr>
     {% endfor %}
     </table>
