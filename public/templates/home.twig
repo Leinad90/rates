@@ -1,6 +1,10 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    Výpis kurzů BTC aktualizován {{ data.updated|format_datetime() }}
+   {% if data.error==false %}
+        Kurzová tabulka aktualizovaná {{ data.updated|format_datetime() }}
+    {% else %}
+       {{ data.error }}
+   {% endif %}
     <table>
         <thead>
             <tr>
