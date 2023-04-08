@@ -30,7 +30,7 @@ class CoindeskDownloader implements CoursesDownloader
     {
         $client = HttpClient::create();
         try {
-            $interface = $client->request('GET', '');
+            $interface = $client->request('GET', $this->url);
             $content = $interface->getContent();
         } catch (TransportExceptionInterface|HttpExceptionInterface $e) {
             throw new CoursesDownloadException(message: 'Could not download', previous: $e);
@@ -52,7 +52,7 @@ class CoindeskDownloader implements CoursesDownloader
             $courseData = new CourseData();
             $courseData->code = $course->code;
             $courseData->rate = $course->rate_float;
-            $courseData->symbol = $course->symbol;
+            $courseData->symbol = html_entity_decode($course->symbol);
             $courseData->description = $course->description;
             $return->courses[$code] = $courseData;
         }

@@ -18,7 +18,7 @@
         <tr>
             <td>{{ currency.description }}</td>
             <td>{{ currency.code }}</td>
-            <td>{{ currency.symbol|raw }}</td>
+            <td>{{ currency.symbol }}</td>
             <td>{{ currency.rate|number_format(2, ',', ' ') }}</td>
         </tr>
     {% endfor %}
