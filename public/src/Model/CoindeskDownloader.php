@@ -41,18 +41,30 @@ class CoindeskDownloader implements CoursesDownloader
         }
         $return = new CoursesData();
         if(!property_exists($data,'time') || !property_exists($data->time,'updatedISO')) {
-            throw new CoursesDownloadException("Downloaded data dosent not contain data->time->updatedIso \n".$data);
+            throw new CoursesDownloadException("Downloaded data dosent not contain time->updatedIso \n".$data);
         }
         try {
             $return->updated = new \DateTime($data->time->updatedISO);
         } catch (\Exception $e) {
-            throw new CoursesDownloadException("Downloaded date is not valid data->time->updatedIso \n".$data);
+            throw new CoursesDownloadException("Downloaded date is not valid time->updatedIso \n".$data);
         }
         foreach ($data->bpi as $code => $course) {
             $courseData = new CourseData();
+            if(!property_exists($course,'code')) {
+                throw new CoursesDownloadException('Downloaded data dosent not contain bpi->'.$code."->code\n".$data);
+            }
             $courseData->code = $course->code;
+            if(!property_exists($course,'rate_float')) {
+                throw new CoursesDownloadException('Downloaded data dosent not contain bpi->'.$code."->rate_float\n".$data);
+            }
             $courseData->rate = $course->rate_float;
+            if(!property_exists($course,'symbol')) {
+                throw new CoursesDownloadException('Downloaded data dosent not contain bpi->'.$code."->symbol\n".$data);
+            }
             $courseData->symbol = html_entity_decode($course->symbol);
+            if(!property_exists($course,'description')) {
+                throw new CoursesDownloadException('Downloaded data dosent not contain bpi->'.$code."->description\n".$data);
+            }
             $courseData->description = $course->description;
             $return->courses[$code] = $courseData;
         }
