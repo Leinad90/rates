@@ -41,7 +41,9 @@ class OrderCommand extends Command
     {
         $ui = new SymfonyStyle($input, $output);
         $arr = $input->getArgument('numbers');
-
+        if(!is_array($arr)) {
+            $arr=[$arr];
+        }
         $ui->writeln('Seřazení čísel: ');
         $ui->writeln(print_r($arr,true));
         $ui->writeln('');

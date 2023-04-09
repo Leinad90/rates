@@ -4,6 +4,11 @@ namespace App\Model;
 
 class OrderNumbers
 {
+
+    /**
+     * @param string[] $numbers
+     * @return string[]
+     */
     public function sort(array $numbers): array
     {
         uasort($numbers, function ($a, $b) {return $this->compare($a,$b);});

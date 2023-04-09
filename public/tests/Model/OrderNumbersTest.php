@@ -14,7 +14,7 @@ class OrderNumbersTest extends KernelTestCase
     {
         parent::setUp();
         $container = static::getContainer();
-        $this->orderNumbers = $container->get(OrderNumbers::class);
+        $this->orderNumbers = $container->get(OrderNumbers::class); /** @phpstan-ignore-line this loads from DI container */
     }
 
     public function testSort(): void
