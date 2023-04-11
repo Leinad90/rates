@@ -48,10 +48,10 @@ class CoindeskDownloader implements CoursesDownloader
         } catch (\Exception $e) {
             throw new CoursesDownloadException("Downloaded date is not valid time->updatedIso \n".$content);
         }
-        if(!property_exists($data,'bpi') || !$data->bpi instanceof \stdClass) {
+        if(!property_exists($data,'bpi') || (!$data->bpi instanceof \stdClass && !is_iterable($data->bpi))) {
             throw new CoursesDownloadException('Downloaded data is not valid - bpi is not array '.$content);
         }
-        foreach ($data->bpi as $code => $course) {
+        foreach ((array)$data->bpi as $code => $course) {
             $courseData = new CourseData();
             if(!property_exists($course,'code')) {
                 throw new CoursesDownloadException('Downloaded data dosent not contain bpi->'.$code."->code\n".$content);
